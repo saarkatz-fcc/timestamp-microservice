@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors'
 import { AddressInfo } from 'net';
+import router from './routes';
 
 // init project
 let app = express();
@@ -16,15 +17,10 @@ app.get("/", function (req, res) {
     res.sendFile(__dirname + '/views/index.html');
 });
 
-
-// configure api endpoints
-app.get("/api/hello", function (req, res) {
-    res.json({greeting: 'hello API'});
-});
-
+app.use(router);
 
 // listen for requests :)
-let listener = app.listen(process.env.PORT, function () {
+let listener = app.listen(process.env.PORT || 3000, function () {
     const port = (listener.address() as AddressInfo).port
     if (port) {
         console.log('Your app is listening on port ' + port);
