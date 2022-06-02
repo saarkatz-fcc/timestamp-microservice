@@ -9,7 +9,7 @@ function time_service_view(req:Request, res:Response) {
     }
 
     if (date.toString() === 'Invalid Date') {
-        res.json({ error : 'Invalid Date' });
+        res.status(400).json({ error : 'Invalid Date' });
     }
 
     res.json({unix: date.getTime(), utc: date.toUTCString()});
